@@ -12,8 +12,12 @@ var contactRouter = require('./app_server/routes/contact');
 var mealsRouter = require('./app_server/routes/meals');
 var newsRouter = require('./app_server/routes/news');
 var roomsRouter = require('./app_server/routes/rooms');
+var apiRouter = require('./app_api/routes/index');
 
 var handlebars = require('hbs');
+
+// bring in the database
+require('./app_api/models/db');
 
 var app = express();
 
@@ -31,6 +35,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+//link routes to controllers
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/travel', travelRouter);
@@ -39,6 +45,7 @@ app.use('/contact', contactRouter);
 app.use('/meals', mealsRouter);
 app.use('/news', newsRouter);
 app.use('/rooms', roomsRouter);
+app.use('/api', apiRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

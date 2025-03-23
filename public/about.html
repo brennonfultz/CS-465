@@ -1,3 +1,10 @@
+<!--
+This page has been updated to use React to render the content rather than Handlebars, which was not well-suited to the About
+page's layout. Handlebars templates can reduce the amount of repeated HTML in a page, an approach that is helpful on pages 
+that have repeating or similar sections but with different content. On the other pages like /travel, this content is pulled
+from the database and rendered in the templates. Because this page is mostly text, Handlebars does not offer much utility here.
+-->
+
 <!DOCTYPE html>
 <!-- Website template by freewebsitetemplates.com -->
 <html>
@@ -5,6 +12,10 @@
 	<meta charset="UTF-8">
 	<title>About - Travlr Getaways Web Template</title>
 	<link rel="stylesheet" href="css/style.css" type="text/css">
+	<!--react scripts-->
+	<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+	<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+	<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
 <body>
 	<div id="background">
@@ -16,16 +27,16 @@
 				<div id="navigation">
 					<ul>
 						<li>
-							<a href="index.html">Home</a>
+							<a href="/index">Home</a>
 						</li>
 						<li>
-							<a href="travel.html">Travel</a>
+							<a href="/travel">Travel</a>
 						</li>
 						<li>
-							<a href="rooms.html">Rooms</a>
+							<a href="/rooms">Rooms</a>
 						</li>
 						<li>
-							<a href="meals.html">Meals</a>
+							<a href="/meals">Meals</a>
 						</li>
 						<li>
 							<a href="news.html">News</a>
@@ -39,10 +50,14 @@
 					</ul>
 				</div>
 			</div>
+		<div id="aboutroot"></div>
+			<script type="text/babel">
+				function AboutComponent() {
+				  return ( //contents rendered as react component
 			<div id="contents">
 				<div class="box">
 					<div>
-						<div class="body">
+						<div class="body"> 
 							<h1>About</h1>
 							<h2>We Have Free Templates for Everyone</h2>
 							<p>
@@ -51,7 +66,7 @@
 							<p>
 								We Have More Templates for You. Looking for more templates? Just browse through all our <a href="http://www.freewebsitetemplates.com/">Free Website Templates</a> and find what you're looking for. But if you don't find any website template you can use, you can try our <a href="http://www.freewebsitetemplates.com/freewebdesign/">Free Web Design</a> service and tell us all about it. Maybe you're looking for something different, something special. And we love the challenge of doing something different and something special.
 							</p>
-							<hr>
+							<hr></hr>
 							<div class="ads">
 								<h2>Our Crews</h2>
 								<p>
@@ -74,26 +89,31 @@
 					</div>
 				</div>
 			</div>
+		);
+		}
+		ReactDOM.render(<AboutComponent />, document.getElementById('aboutroot'));
+		</script>
+		
 		</div>
 		<div id="footer">
 			<div>
-				<ul class="navigation">
+				<ul  class="navigation">
 					<li>
-						<a href="index.html">Home</a>
+						<a href="/index">Home</a>
 					</li>
 					<li>
-						<a href="travel.html">Travel</a>
+						<a href="/travel">Travel</a>
 					</li>
 					<li>
-						<a href="rooms.html">Rooms</a>
+						<a href="/rooms">Rooms</a>
 					</li>
 					<li>
-						<a href="meals.html">Meals</a>
+						<a href="/meals">Meals</a>
 					</li>
 					<li>
 						<a href="news.html">News</a>
 					</li>
-					<li class="active">
+					<li class="selected">
 						<a href="about.html">About</a>
 					</li>
 					<li>

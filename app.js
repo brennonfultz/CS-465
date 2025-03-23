@@ -55,10 +55,10 @@ app.use('/api', (req, res, next) => {
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/travel', travelRouter);
-app.use('/about', aboutRouter);
-app.use('/contact', contactRouter);
+//app.use('/about', aboutRouter);
+//app.use('/contact', contactRouter);
 app.use('/meals', mealsRouter);
-app.use('/news', newsRouter);
+//app.use('/news', newsRouter);
 app.use('/rooms', roomsRouter);
 app.use('/api', apiRouter);
 app.use(passport.initialize());

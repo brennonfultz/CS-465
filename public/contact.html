@@ -1,3 +1,12 @@
+<!--
+The Contact page now implements React as well, with the form being more interactive than
+it was in the Handlebars template. The fields are set to blank when the page loads and the 
+user can enter their information in each of the fields. The button handler uses setFormData
+to reset the fields to blank when the submit button is clicked, preventing any unsanitized 
+input data being read. With minor updating, this design could be connected to an email client
+to send the user's message to the travel company's inbox to allow feedback from clients.
+-->
+
 <!DOCTYPE html>
 <!-- Website template by freewebsitetemplates.com -->
 <html>
@@ -5,6 +14,10 @@
 	<meta charset="UTF-8">
 	<title>Contact - Travlr Getaways Website Template</title>
 	<link rel="stylesheet" href="css/style.css" type="text/css">
+	<!--react scripts-->
+	<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+	<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+	<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
 <body>
 	<div id="background">
@@ -16,16 +29,16 @@
 				<div id="navigation">
 					<ul>
 						<li>
-							<a href="index.html">Home</a>
+							<a href="/index">Home</a>
 						</li>
 						<li>
-							<a href="travel.html">Travel</a>
+							<a href="/travel">Travel</a>
 						</li>
 						<li>
-							<a href="rooms.html">Rooms</a>
+							<a href="/rooms">Rooms</a>
 						</li>
 						<li>
-							<a href="meals.html">Meals</a>
+							<a href="/meals">Meals</a>
 						</li>
 						<li>
 							<a href="news.html">News</a>
@@ -39,62 +52,126 @@
 					</ul>
 				</div>
 			</div>
-			<div id="contents">
-				<div class="box">
-					<div>
-						<div id="contact" class="body">
-							<h1>Contact</h1>
-							<form action="index.html" method="post">
-								<table>
-									<tbody>
-										<tr>
-											<td>Name:</td>
-											<td><input type="text" value="" class="txtfield"></td>
-										</tr> <tr>
-											<td>Email:</td>
-											<td><input type="text" value="" class="txtfield"></td>
-										</tr> <tr>
-											<td>Subject:</td>
-											<td><input type="text" value="" class="txtfield"></td>
-										</tr> <tr>
-											<td class="txtarea">Message:</td>
-											<td><textarea></textarea></td>
-										</tr> <tr>
-											<td></td>
-											<td><input type="submit" value="" class="btn"></td>
-										</tr>
-									</tbody>
-								</table>
-							</form>
-							<h2>Travlr Getaways</h2>
-							<p>
-								<span>Address:</span> 123 Lorem Ipsum Cove, Sed Ut City, LI 12345
-							</p>
-							<p>
-								<span>Telephone Number:</span> 1-800-999-9999
-							</p>
-							<p>
-								<span>Fax Number:</span> 1-800-111-1111
-							</p>
+			<div id="contactroot"></div>
+			<script type="text/babel">
+				function ContactComponent() { //contact form
+					const [formData, setFormData] = React.useState({
+						name: "",
+						email: "",
+						subject: "",
+						message: ""
+					});
+			
+					const handleChange = (e) => {
+						setFormData({
+							...formData,
+							[e.target.name]: e.target.value
+						});
+					};
+			
+					const handleSubmit = (e) => { //clear on submit
+						e.preventDefault();
+						setFormData({ name: "", email: "", subject: "", message: "" });
+					};
+			
+					return (
+						<div id="contents">
+							<div className="box">
+								<div>
+									<div id="contact" className="body">
+										<h1>Contact</h1>
+										<form onSubmit={handleSubmit}>
+											<table>
+												<tbody>
+													<tr>
+														<td>Name:</td>
+														<td>
+															<input
+																type="text"
+																name="name"
+																value={formData.name}
+																onChange={handleChange}
+																className="txtfield"
+															/>
+														</td>
+													</tr>
+													<tr>
+														<td>Email:</td>
+														<td>
+															<input
+																type="text"
+																name="email"
+																value={formData.email}
+																onChange={handleChange}
+																className="txtfield"
+															/>
+														</td>
+													</tr>
+													<tr>
+														<td>Subject:</td>
+														<td>
+															<input
+																type="text"
+																name="subject"
+																value={formData.subject}
+																onChange={handleChange}
+																className="txtfield"
+															/>
+														</td>
+													</tr>
+													<tr>
+														<td className="txtarea">Message:</td>
+														<td>
+															<textarea
+																name="message"
+																value={formData.message}
+																onChange={handleChange}
+															></textarea>
+														</td>
+													</tr>
+													<tr>
+														<td></td>
+														<td>
+															<input type="submit" value="" className="btn" />
+														</td>
+													</tr>
+												</tbody>
+											</table>
+										</form>
+										<h2>Travlr Getaways</h2>
+										<p>
+											<span>Address:</span> 123 Lorem Ipsum Cove, Sed Ut City, LI 12345
+										</p>
+										<p>
+											<span>Telephone Number:</span> 1-800-999-9999
+										</p>
+										<p>
+											<span>Fax Number:</span> 1-800-111-1111
+										</p>
+									</div>
+								</div>
+							</div>
 						</div>
-					</div>
-				</div>
-			</div>
+					);
+				}
+			
+				ReactDOM.render(<ContactComponent />, document.getElementById("contactroot"));
+			</script>
 		</div>
 		<div id="footer">
 			<div>
 				<ul class="navigation">
 					<li>
-						<a href="index.html">Home</a>
+						<a href="/index">Home</a>
 					</li>
 					<li>
-						<a href="travel.html">Travel</a>
+						<a href="/travel">Travel</a>
 					</li>
 					<li>
-						<a href="rooms.html">Rooms</a>
+						<a href="/rooms">Rooms</a>
 					</li>
 					<li>
-						<a href="meals.html">Meals</a>
+						<a href="/meals">Meals</a>
 					</li>
 					<li>
 						<a href="news.html">News</a>
@@ -102,7 +179,7 @@
 					<li>
 						<a href="about.html">About</a>
 					</li>
-					<li class="active">
+					<li class="selected">
 						<a href="contact.html">Contact</a>
 					</li>
 				</ul>

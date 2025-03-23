@@ -1,3 +1,11 @@
+<!--
+This page has also been updated with React replacing Handlebars. In modern web development, React is
+a more commonly used frontend framework and refactoring from an older tool like Handlebars can open
+the door for a more dynamic user experience. However, switching to React does not have to mean drastically
+changing the code or the appearance. In this case, the same HTML content can be rendered as a React 
+component, so the page can look the same while having the option to add more interactivity.
+-->
+
 <!DOCTYPE html>
 <!-- Website template by freewebsitetemplates.com -->
 <html>
@@ -5,6 +13,10 @@
 	<meta charset="UTF-8">
 	<title>News - Travlr Getaways Website Template</title>
 	<link rel="stylesheet" href="css/style.css" type="text/css">
+	<!--react scripts-->
+	<script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+	<script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+	<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
 </head>
 <body>
 	<div id="background">
@@ -16,16 +28,16 @@
 				<div id="navigation">
 					<ul>
 						<li>
-							<a href="index.html">Home</a>
+							<a href="/index">Home</a>
 						</li>
 						<li>
-							<a href="travel.html">Travel</a>
+							<a href="/travel">Travel</a>
 						</li>
 						<li>
-							<a href="rooms.html">Rooms</a>
+							<a href="/rooms">Rooms</a>
 						</li>
 						<li>
-							<a href="meals.html">Meals</a>
+							<a href="/meals">Meals</a>
 						</li>
 						<li class="selected">
 							<a href="news.html">News</a>
@@ -39,6 +51,10 @@
 					</ul>
 				</div>
 			</div>
+			<div id="newsroot"></div>
+			<script type="text/babel">
+				function NewsComponent() {
+				  return ( //contents rendered as react component
 			<div id="contents">
 				<div class="box">
 					<div>
@@ -83,9 +99,9 @@
 							</div>
 							<div>
 								<h1>News</h1>
-								<img src="images/kayak.jpg" alt="Img">
+								<img src="images/kayak.jpg" alt="Img"></img>
 								<h2>Experience Kayaking!</h2>
-								<span class="time">April 03, 2023<br> by: Juan De La Cruz</span>
+								<span class="time">April 03, 2023<br></br> by: Juan De La Cruz</span>
 								<p>
 									Sed et augue lorem. In sit amet placerat arcu. Mauris volutpat ipsum ac justo mollis vel vestibulum orci gravida. Vestibulum sit amet porttitor odio. Nulla facilisi. Fusce at pretium felis. Sed consequat libero ut turpis venenatis ut aliquam risus semper. Etiam convallis mi vel risus pretium sodales. Etiam nunc lorem, ullamcorper vitae laoreet id, rutrum et tortor. Vivamus luctus, lacus id egestas facilisis, nunc nunc ultricies lorem, vitae pulvinar nibh urna vel velit.
 								</p>
@@ -100,26 +116,30 @@
 					</div>
 				</div>
 			</div>
+			);
+		}
+		ReactDOM.render(<NewsComponent />, document.getElementById('newsroot'));
+		</script>
 		</div>
 		<div id="footer">
 			<div>
 				<ul class="navigation">
 					<li>
-						<a href="index.html">Home</a>
+						<a href="/index">Home</a>
 					</li>
 					<li>
-						<a href="travel.html">Travel</a>
+						<a href="/travel">Travel</a>
 					</li>
 					<li>
-						<a href="rooms.html">Rooms</a>
+						<a href="/rooms">Rooms</a>
 					</li>
 					<li>
-						<a href="meals.html">Meals</a>
+						<a href="/meals">Meals</a>
 					</li>
-					<li class="active">
+					<li>
 						<a href="news.html">News</a>
 					</li>
-					<li>
+					<li class="selected">
 						<a href="about.html">About</a>
 					</li>
 					<li>

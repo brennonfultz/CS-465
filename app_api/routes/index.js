@@ -32,4 +32,14 @@ router
     .get(tripsController.tripsFindByCode)
     .put(auth, tripsController.tripsUpdateTrip);
 
+//GET method routes tripsFindByName - requires parameter
+router
+    .route('/trips/name/:tripName')
+    .get(tripsController.tripsFindByName) //router for trip by name
+
+//GET method routes tripsFindByPrice - requires parameter
+router
+    .route('/trips/price/:tripPerPerson')
+    .get(tripsController.tripsFindByPrice) //router for trip by price
+
 module.exports = router;

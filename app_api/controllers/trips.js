@@ -74,6 +74,52 @@ const tripsFindByCode = async(req, res) => {
     }
 };
 
+//GET: /trips/:tripName - lists single trip
+// Regardless of outcome, response must include HTML status code
+//and JSON message to the requesting client
+const tripsFindByName = async(req, res) => {
+  const q = await Model
+      .find({'name' : { $regex: req.params.tripName, $options: 'i' }})
+      .exec();
+
+      //uncomment to show results of query
+      //console.log(q);
+
+  if(!q)
+  { //Databse returned no data
+      return res
+              .status(404)
+              .json(err);    
+  } else { //return results
+      return res
+          .status(200)
+          .json(q);
+  }
+};
+
+//GET: /trips/:tripPerPerson - lists single trip
+// Regardless of outcome, response must include HTML status code
+//and JSON message to the requesting client
+const tripsFindByPrice = async(req, res) => {
+  const q = await Model
+      .find({'perPerson' : req.params.tripPerPerson})
+      .exec();
+
+      //uncomment to show results of query
+      //console.log(q);
+
+  if(!q)
+  { //Databse returned no data
+      return res
+              .status(404)
+              .json(err);    
+  } else { //return results
+      return res
+          .status(200)
+          .json(q);
+  }
+};
+
 //POST: /trips - adds single new trip
 // Regardless of outcome, response must include HTML status code
 //and JSON message to the requesting client
@@ -152,6 +198,8 @@ const tripsUpdateTrip = async (req, res) => {
 module.exports = {
     tripsList,
     tripsFindByCode,
+    tripsFindByName,
+    tripsFindByPrice,
     tripsAddTrip,
     tripsUpdateTrip
 };

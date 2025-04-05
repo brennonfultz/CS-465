@@ -10,7 +10,8 @@ email: {
 },
 name: {
  type: String,
- required: true
+ required: true,
+ index: true //name index
 },
 hash: String,
 salt: String
